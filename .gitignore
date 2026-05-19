@@ -28,7 +28,9 @@ out/
 *.class
 
 application-dev.yml
-
+application-prod.yml
+application-uat.yml
+application-test.yml
 # Log files
 *.log
 
