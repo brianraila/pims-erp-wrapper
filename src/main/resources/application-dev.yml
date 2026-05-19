@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    consul:
+      enabled: false
+      discovery:
+        enabled: false
+        register: false
+      config:
+        enabled: false
+
+server:
+  port: 8083
+
+erpnext:
+  scheme: http
+  domain: local
+  # port omitted — ERPNext frontend is on default HTTP port 80
+  # Global fallback credentials (unused when per-tenant entries are set)
+  api-key: ${ERPNEXT_API_KEY:}
+  api-secret: ${ERPNEXT_API_SECRET:}
+  tenants:
+    pharmacy-a:
+      api-key: 740dc1caa4a8a81
+      api-secret: 69e0c102a19d898
+    pharmacy-b:
+      api-key: e94aa65224c3428
+      api-secret: 6a7f73e56b8c25d

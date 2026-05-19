@@ -8,3 +8,18 @@ spring:
 
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
+
+# Canonical REST contract: classpath static/openapi/inventory-api-v1.yaml (also linked in Swagger UI).
+# Generated /v3/api-docs is for convenience; external publishers should prefer the versioned YAML.
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tags-sorter: alpha
+    urls:
+      - name: Inventory API contract (YAML)
+        url: /openapi/inventory-api-v1.yaml
+      - name: Live service (generated)
+        url: /v3/api-docs
