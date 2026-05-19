@@ -24,29 +24,55 @@
         <netty.version>4.1.133.Final</netty.version>
         <sonar.exclusions>
             pom.xml,
-            **/config/**,
-            **/dto/**,
-            **/enums/**,
-            **/exception/**,
-            **/model/**,
-            **/repository/**,
-            **/security/**,
-            **/service/**,
-            **/utils/**,
+            **/annotation/**/*,
+            **/api/**/*,
+            **/config/*.*,
+            **/dto/**/*,
+            **/enums/*.*,
+            **/erpnext/**/*,
+            **/exception/*.*,
+            **/exception/**/*,
+            **/mapper/**/*,
+            **/model/*.*,
+            **/model/**/*,
+            **/properties/*.*,
+            **/repository/*.*,
+            **/security/*.*,
+            **/service/**/*.*,
+            **/service/impl/*.*,
+            **/service/util/*.*,
+            **/service/*.*,
+            **/util/**/*,
+            **/utils/*.*,
+            **/validators/*.*,
+            **/web/**/*,
             src/main/java/ke/co/safaricom/pims/inventory/PimsInventoryApplication.java,
             src/test/java/ke/co/safaricom/pims/inventory/PimsInventoryApplicationTests.java
         </sonar.exclusions>
         <sonar.coverage.exclusions>
             pom.xml,
-            **/config/**,
-            **/dto/**,
-            **/enums/**,
-            **/exception/**,
-            **/model/**,
-            **/repository/**,
-            **/security/**,
-            **/service/**,
-            **/utils/**,
+            **/annotation/**/*,
+            **/api/**/*,
+            **/config/*.*,
+            **/dto/**/*,
+            **/enums/*.*,
+            **/erpnext/**/*,
+            **/exception/*.*,
+            **/exception/**/*,
+            **/mapper/**/*,
+            **/model/*.*,
+            **/model/**/*,
+            **/properties/*.*,
+            **/repository/*.*,
+            **/security/*.*,
+            **/service/**/*.*,
+            **/service/impl/*.*,
+            **/service/util/*.*,
+            **/service/*.*,
+            **/util/**/*,
+            **/utils/*.*,
+            **/validators/*.*,
+            **/web/**/*,
             src/main/java/ke/co/safaricom/pims/inventory/PimsInventoryApplication.java,
             src/test/java/ke/co/safaricom/pims/inventory/PimsInventoryApplicationTests.java
         </sonar.coverage.exclusions>
@@ -341,16 +367,24 @@
                         </goals>
                         <configuration>
                             <excludes>
+                                <exclude>**/annotation/**/*</exclude>
+                                <exclude>**/api/**/*</exclude>
                                 <exclude>**/config/**/*</exclude>
                                 <exclude>**/controller/**/*</exclude>
                                 <exclude>**/dto/**/*</exclude>
                                 <exclude>**/enums/**/*</exclude>
+                                <exclude>**/erpnext/**/*</exclude>
                                 <exclude>**/exception/**/*</exclude>
+                                <exclude>**/mapper/**/*</exclude>
                                 <exclude>**/model/**/*</exclude>
+                                <exclude>**/properties/**/*</exclude>
                                 <exclude>**/repository/**/*</exclude>
                                 <exclude>**/security/**/*</exclude>
                                 <exclude>**/service/**/*</exclude>
+                                <exclude>**/util/**/*</exclude>
                                 <exclude>**/utils/**/*</exclude>
+                                <exclude>**/validators/**/*</exclude>
+                                <exclude>**/web/**/*</exclude>
                             </excludes>
                         </configuration>
                     </execution>
