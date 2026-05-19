@@ -27,6 +27,8 @@ out/
 # Compiled class files
 *.class
 
+application-dev.yml
+
 # Log files
 *.log
 
