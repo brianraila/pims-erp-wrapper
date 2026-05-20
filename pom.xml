@@ -47,8 +47,12 @@
             **/validators/*.*,
             **/web/**/*,
             src/main/java/ke/co/safaricom/pims/inventory/PimsInventoryApplication.java,
-            src/test/java/ke/co/safaricom/pims/inventory/PimsInventoryApplicationTests.java
+            src/test/java/ke/co/safaricom/pims/inventory/PimsInventoryApplicationTests.java,
+            src/test/**
         </sonar.exclusions>
+        <sonar.test.exclusions>
+            src/test/**
+        </sonar.test.exclusions>
         <sonar.coverage.exclusions>
             pom.xml,
             **/annotation/**/*,
