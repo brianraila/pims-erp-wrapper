@@ -3,6 +3,7 @@ package ke.co.safaricom.pims.inventory.exception.handler;
 import ke.co.safaricom.pims.inventory.exception.ConflictException;
 import ke.co.safaricom.pims.inventory.exception.ResourceNotFoundException;
 import ke.co.safaricom.pims.inventory.exception.ServiceValidationException;
+import ke.co.safaricom.pims.inventory.exception.UnknownTenantException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleNotFound(ResourceNotFoundException ex) {
         return specError(HttpStatus.NOT_FOUND, "NOT_FOUND", ex.getMessage(), null);
+    }
+
+    @ExceptionHandler(UnknownTenantException.class)
+    public ResponseEntity<Map<String, Object>> handleUnknownTenant(UnknownTenantException ex) {
+        return specError(HttpStatus.NOT_FOUND, "UNKNOWN_TENANT", ex.getMessage(), null);
     }
 
     @ExceptionHandler(ConflictException.class)

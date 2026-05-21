@@ -1,6 +1,5 @@
 package ke.co.safaricom.pims.inventory.config;
 
-import ke.co.safaricom.pims.inventory.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,9 +31,7 @@ public class SecurityConfig {
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/actuator/health", "/actuator/info").permitAll()
-                        .pathMatchers("/openapi/**").permitAll()
-                        .pathMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                        .pathMatchers(Constants.API_PREFIX + "/**").authenticated()
+                        .pathMatchers("/**").authenticated()
                         .anyExchange().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}))
                 .build();

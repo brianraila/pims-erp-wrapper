@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ms-pims-inventory-service
+    name: ms-pims-erpnext-wrapper
 
   config:
     import:
@@ -9,17 +9,15 @@ spring:
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
 
-# Canonical REST contract: classpath static/openapi/inventory-api-v1.yaml (also linked in Swagger UI).
-# Generated /v3/api-docs is for convenience; external publishers should prefer the versioned YAML.
-springdoc:
-  api-docs:
-    path: /v3/api-docs
-  swagger-ui:
-    path: /swagger-ui.html
-    operationsSorter: method
-    tags-sorter: alpha
-    urls:
-      - name: Inventory API contract (YAML)
-        url: /openapi/inventory-api-v1.yaml
-      - name: Live service (generated)
-        url: /v3/api-docs
+# Sample site registry — override via Consul KV or environment-specific profiles.
+# Each key is the tenant/site ID sent in the X-Tenant-Id header (or JWT tenant_id claim).
+erpnext:
+  sites:
+    sha-nairobi:
+      url: http://sha-nairobi.sha.go.ke
+      api-key: ${ERPNEXT_SHA_NAIROBI_KEY:}
+      api-secret: ${ERPNEXT_SHA_NAIROBI_SECRET:}
+    sha-mombasa:
+      url: http://sha-mombasa.sha.go.ke
+      api-key: ${ERPNEXT_SHA_MOMBASA_KEY:}
+      api-secret: ${ERPNEXT_SHA_MOMBASA_SECRET:}
