@@ -1,7 +1,7 @@
-package ke.co.safaricom.pims.inventory.proxy;
+package ke.co.safaricom.pims.wrapper.proxy;
 
-import ke.co.safaricom.pims.inventory.config.ErpNextProperties;
-import ke.co.safaricom.pims.inventory.security.TenantContextResolver;
+import ke.co.safaricom.pims.wrapper.config.ErpNextProperties;
+import ke.co.safaricom.pims.wrapper.security.TenantContextResolver;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;

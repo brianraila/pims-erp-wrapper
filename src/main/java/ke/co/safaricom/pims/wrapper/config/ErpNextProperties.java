@@ -1,6 +1,6 @@
-package ke.co.safaricom.pims.inventory.config;
+package ke.co.safaricom.pims.wrapper.config;
 
-import ke.co.safaricom.pims.inventory.exception.UnknownTenantException;
+import ke.co.safaricom.pims.wrapper.exception.UnknownTenantException;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Map;

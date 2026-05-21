@@ -1,4 +1,4 @@
-package ke.co.safaricom.pims.inventory.exception;
+package ke.co.safaricom.pims.wrapper.exception;
 
 public class ConflictException extends RuntimeException {
 

@@ -1,9 +1,9 @@
-package ke.co.safaricom.pims.inventory.exception.handler;
+package ke.co.safaricom.pims.wrapper.exception.handler;
 
-import ke.co.safaricom.pims.inventory.exception.ConflictException;
-import ke.co.safaricom.pims.inventory.exception.ResourceNotFoundException;
-import ke.co.safaricom.pims.inventory.exception.ServiceValidationException;
-import ke.co.safaricom.pims.inventory.exception.UnknownTenantException;
+import ke.co.safaricom.pims.wrapper.exception.ConflictException;
+import ke.co.safaricom.pims.wrapper.exception.ResourceNotFoundException;
+import ke.co.safaricom.pims.wrapper.exception.ServiceValidationException;
+import ke.co.safaricom.pims.wrapper.exception.UnknownTenantException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

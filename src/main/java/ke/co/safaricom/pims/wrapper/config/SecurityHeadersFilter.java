@@ -1,4 +1,4 @@
-package ke.co.safaricom.pims.inventory.config;
+package ke.co.safaricom.pims.wrapper.config;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;

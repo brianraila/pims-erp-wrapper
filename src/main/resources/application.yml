@@ -8,16 +8,3 @@ spring:
 
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
-
-# Sample site registry — override via Consul KV or environment-specific profiles.
-# Each key is the tenant/site ID sent in the X-Tenant-Id header (or JWT tenant_id claim).
-erpnext:
-  sites:
-    sha-nairobi:
-      url: http://sha-nairobi.sha.go.ke
-      api-key: ${ERPNEXT_SHA_NAIROBI_KEY:}
-      api-secret: ${ERPNEXT_SHA_NAIROBI_SECRET:}
-    sha-mombasa:
-      url: http://sha-mombasa.sha.go.ke
-      api-key: ${ERPNEXT_SHA_MOMBASA_KEY:}
-      api-secret: ${ERPNEXT_SHA_MOMBASA_SECRET:}

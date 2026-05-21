@@ -1,4 +1,4 @@
-package ke.co.safaricom.pims.inventory.security;
+package ke.co.safaricom.pims.wrapper.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;

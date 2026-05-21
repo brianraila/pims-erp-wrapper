@@ -1,4 +1,4 @@
-package ke.co.safaricom.pims.inventory.config;
+package ke.co.safaricom.pims.wrapper.config;
 
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;

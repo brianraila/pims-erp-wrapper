@@ -46,8 +46,8 @@
             **/utils/*.*,
             **/validators/*.*,
             **/web/**/*,
-            src/main/java/ke/co/safaricom/pims/inventory/PimsInventoryApplication.java,
-            src/test/java/ke/co/safaricom/pims/inventory/PimsInventoryApplicationTests.java,
+            src/main/java/ke/co/safaricom/pims/wrapper/ErpNextWrapperApplication.java,
+            src/test/java/ke/co/safaricom/pims/wrapper/ErpNextWrapperApplicationTests.java,
             src/test/**
         </sonar.exclusions>
         <sonar.test.exclusions>
@@ -77,8 +77,8 @@
             **/utils/*.*,
             **/validators/*.*,
             **/web/**/*,
-            src/main/java/ke/co/safaricom/pims/inventory/PimsInventoryApplication.java,
-            src/test/java/ke/co/safaricom/pims/inventory/PimsInventoryApplicationTests.java
+            src/main/java/ke/co/safaricom/pims/wrapper/ErpNextWrapperApplication.java,
+            src/test/java/ke/co/safaricom/pims/wrapper/ErpNextWrapperApplicationTests.java
         </sonar.coverage.exclusions>
     </properties>
 
