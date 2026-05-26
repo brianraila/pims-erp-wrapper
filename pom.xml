@@ -37,6 +37,7 @@
             **/model/**/*,
             **/properties/*.*,
             **/repository/*.*,
+            **/proxy/**/*,
             **/security/*.*,
             **/service/**/*.*,
             **/service/impl/*.*,
@@ -68,6 +69,7 @@
             **/model/**/*,
             **/properties/*.*,
             **/repository/*.*,
+            **/proxy/**/*,
             **/security/*.*,
             **/service/**/*.*,
             **/service/impl/*.*,
@@ -355,6 +357,7 @@
                                 <exclude>**/model/**/*</exclude>
                                 <exclude>**/properties/**/*</exclude>
                                 <exclude>**/repository/**/*</exclude>
+                                <exclude>**/proxy/**/*</exclude>
                                 <exclude>**/security/**/*</exclude>
                                 <exclude>**/service/**/*</exclude>
                                 <exclude>**/util/**/*</exclude>
