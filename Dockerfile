@@ -8,7 +8,7 @@ RUN apk --no-cache upgrade \
     && echo "Africa/Nairobi" > /etc/timezone \
     && addgroup -S pims && adduser -S -G pims pims
 
-COPY --chown=pims:pims target/ms-pims-inventory-service-1.0.0-SNAPSHOT.jar app.jar
+COPY --chown=pims:pims target/ms-pims-erpnext-wrapper-1.0.0-SNAPSHOT.jar app.jar
 
 USER pims
 
