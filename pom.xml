@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.14</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>ke.co.safaricom.pims</groupId>
+    <artifactId>ms-pims-erpnext-wrapper</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>ms-pims-erpnext-wrapper</name>
+    <description>PIMS ERPNext Wrapper — transparent header-based proxy to ERPNext sites</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <spring-cloud.version>2025.0.2</spring-cloud.version>
+        <jacoco.version>0.8.12</jacoco.version>
+        <netty.version>4.1.133.Final</netty.version>
+        <sonar.exclusions>
+            pom.xml,
+            **/annotation/**/*,
+            **/api/**/*,
+            **/config/*.*,
+            **/dto/**/*,
+            **/enums/*.*,
+            **/erpnext/**/*,
+            **/exception/*.*,
+            **/exception/**/*,
+            **/mapper/**/*,
+            **/model/*.*,
+            **/model/**/*,
+            **/properties/*.*,
+            **/repository/*.*,
+            **/proxy/**/*,
+            **/security/*.*,
+            **/service/**/*.*,
+            **/service/impl/*.*,
+            **/service/util/*.*,
+            **/service/*.*,
+            **/util/**/*,
+            **/utils/*.*,
+            **/validators/*.*,
+            **/web/**/*,
+            src/main/java/ke/co/safaricom/pims/wrapper/ErpNextWrapperApplication.java,
+            src/test/java/ke/co/safaricom/pims/wrapper/ErpNextWrapperApplicationTests.java,
+            src/test/**
+        </sonar.exclusions>
+        <sonar.test.exclusions>
+            src/test/**
+        </sonar.test.exclusions>
+        <sonar.coverage.exclusions>
+            pom.xml,
+            **/annotation/**/*,
+            **/api/**/*,
+            **/config/*.*,
+            **/dto/**/*,
+            **/enums/*.*,
+            **/erpnext/**/*,
+            **/exception/*.*,
+            **/exception/**/*,
+            **/mapper/**/*,
+            **/model/*.*,
+            **/model/**/*,
+            **/properties/*.*,
+            **/repository/*.*,
+            **/proxy/**/*,
+            **/security/*.*,
+            **/service/**/*.*,
+            **/service/impl/*.*,
+            **/service/util/*.*,
+            **/service/*.*,
+            **/util/**/*,
+            **/utils/*.*,
+            **/validators/*.*,
+            **/web/**/*,
+            src/main/java/ke/co/safaricom/pims/wrapper/ErpNextWrapperApplication.java,
+            src/test/java/ke/co/safaricom/pims/wrapper/ErpNextWrapperApplicationTests.java
+        </sonar.coverage.exclusions>
+    </properties>
+
+    <dependencies>
+        <!-- Reactive web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <!-- Observability -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Security: JWT validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+
+        <!-- Consul: discovery + config -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- FIX GHSA-72hv-8253-57qq: jackson-core DoS via async parser -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.21.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.21.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.21</version>
+        </dependency>
+
+        <!-- FIX Netty CVEs (CVE-2026-42579/83/84/85/87/80/81, CVE-2026-41417/42578): bump to 4.1.133.Final -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec-http</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec-http2</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec-dns</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-handler-proxy</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+
+        <!-- FIX CVE-2026-5598, CVE-2026-0636: bcprov-jdk18on private key leak + LDAP injection -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>1.84</version>
+        </dependency>
+
+        <!-- FIX CVE-2025-48924: commons-lang3 uncontrolled recursion -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.18.0</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- FIX GHSA-72hv-8253-57qq: align all Jackson modules via BOM -->
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>2.21.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- FIX CVE-2026-22740/41/45: spring-webflux DoS vulnerabilities -->
+            <!-- Pin all Spring Framework modules to 6.2.18 for consistency -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webflux</artifactId>
+                <version>6.2.18</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>6.2.18</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>6.2.18</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>6.2.18</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>6.2.18</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>6.2.18</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>6.2.18</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>6.2.18</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jcl</artifactId>
+                <version>6.2.18</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.3.2</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.1</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/annotation/**/*</exclude>
+                                <exclude>**/api/**/*</exclude>
+                                <exclude>**/config/**/*</exclude>
+                                <exclude>**/controller/**/*</exclude>
+                                <exclude>**/dto/**/*</exclude>
+                                <exclude>**/enums/**/*</exclude>
+                                <exclude>**/erpnext/**/*</exclude>
+                                <exclude>**/exception/**/*</exclude>
+                                <exclude>**/mapper/**/*</exclude>
+                                <exclude>**/model/**/*</exclude>
+                                <exclude>**/properties/**/*</exclude>
+                                <exclude>**/repository/**/*</exclude>
+                                <exclude>**/proxy/**/*</exclude>
+                                <exclude>**/security/**/*</exclude>
+                                <exclude>**/service/**/*</exclude>
+                                <exclude>**/util/**/*</exclude>
+                                <exclude>**/utils/**/*</exclude>
+                                <exclude>**/validators/**/*</exclude>
+                                <exclude>**/web/**/*</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
