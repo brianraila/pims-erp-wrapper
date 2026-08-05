@@ -8,3 +8,10 @@ spring:
 
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
+
+# --- Config server / env keys for tenant registry ---
+# spring.r2dbc.url: r2dbc:postgresql://<onboarding-db-host>:5432/<onboarding-db>
+# spring.r2dbc.username / spring.r2dbc.password  (prefer read-only DB role)
+# ms.aes.current-key / ms.aes.previous-key / ms.aes.algorithm  (same as onboarding)
+# erpnext.registry.fallback-enabled: false   # production: DB only
+# erpnext.sites.*                             # optional static fallback (dev)

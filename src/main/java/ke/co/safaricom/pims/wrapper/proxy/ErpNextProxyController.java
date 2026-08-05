@@ -1,6 +1,7 @@
 package ke.co.safaricom.pims.wrapper.proxy;
 
 import ke.co.safaricom.pims.wrapper.config.ErpNextProperties;
+import ke.co.safaricom.pims.wrapper.registry.ErpNextTenantResolver;
 import ke.co.safaricom.pims.wrapper.security.TenantContextResolver;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
@@ -23,15 +24,15 @@ public class ErpNextProxyController {
             "connection", "keep-alive", "proxy-authenticate", "proxy-authorization",
             "te", "trailers", "transfer-encoding", "upgrade", "host");
 
-    private final ErpNextProperties properties;
+    private final ErpNextTenantResolver tenantSiteResolver;
     private final TenantContextResolver tenantResolver;
     private final WebClient webClient;
 
     public ErpNextProxyController(
-            ErpNextProperties properties,
+            ErpNextTenantResolver tenantSiteResolver,
             TenantContextResolver tenantResolver,
             WebClient webClient) {
-        this.properties = properties;
+        this.tenantSiteResolver = tenantSiteResolver;
         this.tenantResolver = tenantResolver;
         this.webClient = webClient;
     }
@@ -53,7 +54,11 @@ public class ErpNextProxyController {
     }
 
     private Mono<Void> forward(String tenantId, ServerWebExchange exchange) {
-        ErpNextProperties.SiteConfig site = properties.siteFor(tenantId);
+        return tenantSiteResolver.resolve(tenantId)
+                .flatMap(site -> proxyToSite(site, exchange));
+    }
+
+    private Mono<Void> proxyToSite(ErpNextProperties.SiteConfig site, ServerWebExchange exchange) {
         ServerHttpRequest req = exchange.getRequest();
 
         String query = req.getURI().getRawQuery();

@@ -3,6 +3,7 @@ package ke.co.safaricom.pims.wrapper.exception.handler;
 import ke.co.safaricom.pims.wrapper.exception.ConflictException;
 import ke.co.safaricom.pims.wrapper.exception.ResourceNotFoundException;
 import ke.co.safaricom.pims.wrapper.exception.ServiceValidationException;
+import ke.co.safaricom.pims.wrapper.exception.TenantProvisioningException;
 import ke.co.safaricom.pims.wrapper.exception.UnknownTenantException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UnknownTenantException.class)
     public ResponseEntity<Map<String, Object>> handleUnknownTenant(UnknownTenantException ex) {
         return specError(HttpStatus.NOT_FOUND, "UNKNOWN_TENANT", ex.getMessage(), null);
+    }
+
+    @ExceptionHandler(TenantProvisioningException.class)
+    public ResponseEntity<Map<String, Object>> handleTenantProvisioning(TenantProvisioningException ex) {
+        return specError(HttpStatus.SERVICE_UNAVAILABLE, "TENANT_PROVISIONING", ex.getMessage(), null);
     }
 
     @ExceptionHandler(ConflictException.class)
