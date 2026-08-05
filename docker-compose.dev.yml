@@ -1,0 +1,17 @@
+services:
+  wrapper:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    container_name: pims-erp-wrapper
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    networks:
+      - traefik-proxy
+    restart: unless-stopped
+
+networks:
+  traefik-proxy:
+    external: true
