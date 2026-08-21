@@ -1,17 +1,17 @@
 spring:
   application:
     name: ms-pims-erpnext-wrapper
-
+  service:
+    name: ${spring.application.name}
   config:
-    import:
-      - "optional:consul:"
-
+    import: optional:configserver:http://fs-devops-configserver-svc.devops:8888
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
 
-# --- Config server / env keys for tenant registry ---
+# --- Config server / env keys required for ERPNext tenant proxy ---
 # spring.r2dbc.url: r2dbc:postgresql://<onboarding-db-host>:5432/<onboarding-db>
-# spring.r2dbc.username / spring.r2dbc.password  (prefer read-only DB role)
-# ms.aes.current-key / ms.aes.previous-key / ms.aes.algorithm  (same as onboarding)
-# erpnext.registry.fallback-enabled: false   # production: DB only
-# erpnext.sites.*                             # optional static fallback (dev)
+# spring.r2dbc.username / spring.r2dbc.password  (prefer read-only role; reads erpnext_tenant)
+# ms.aes.current-key / ms.aes.previous-key / ms.aes.algorithm  (same as onboarding; decrypts api_secret_encrypted)
+# erpnext.registry.fallback-enabled: false   # production: DB-only tenant registry (no erpnext.sites.*)
+# spring.security.oauth2.resourceserver.jwt.issuer-uri: https://iam-dhealth.sha.go.ke/realms/pims  (required when profile != dev)
+# spring.security.oauth2.resourceserver.jwt.jwk-set-uri: ...  (optional alternative to issuer-uri)
